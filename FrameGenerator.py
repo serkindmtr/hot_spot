@@ -13,7 +13,7 @@ matrix = np.zeros((Height, Width))
 
 for i in range(0, Height):
     for j in range(0, Width):
-        a = int((noise1[i, j] + target[i, j]) / 2)
+        a = int(max((noise1[i, j], target[i, j])))
         matrix[i, j] = a
 
 print_matrix(matrix, 'frame')
