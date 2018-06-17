@@ -14,7 +14,7 @@ def print_mas(mas):
         for j in range(0, W):
             a = int(mas[i, j])
             draw.point((j, i), fill=(a, a, a))
-    img.save("/Users/sdima96/Pictures/noise.png", "png")
+    img.save("Pictures/noise.png", "png")
 
 
 def noise_generator1():

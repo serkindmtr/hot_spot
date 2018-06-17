@@ -93,4 +93,5 @@ def noise_generator2():
         x = 0.0
     return mas
 
-img.save("/Users/sdima96/Pictures/perlin2d.png", "png")
+
+img.save("Pictures/perlin2d.png", "png")
