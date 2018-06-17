@@ -19,6 +19,7 @@ for i in range(0, Height):
         pixel = img.getpixel((j, i))[0]
         matrix[i, j] = pixel / 255
 
+# TODO Разобраться в робастом алгоритме и изменить мапинг цели
 for i in range(0, Height - 1):
     for j in range(0, Width - 1):
         if ((matrix[i, j] > 0.05) & (matrix[i, j + 1] > 0.05) & (matrix[i + 1, j] > 0.05) & (

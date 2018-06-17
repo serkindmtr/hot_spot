@@ -3,7 +3,7 @@ from PrintFunction import print_matrix
 import random
 import numpy as np
 
-
+# TODO реализовать гаусовский нормированный шум https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.normal.html
 def noise_generator1():
     matrix = np.zeros((Height, Width))
     for i in range(0, Height):

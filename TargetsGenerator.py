@@ -11,7 +11,7 @@ def normalize_matrix(matrix, max_element):
             matrix[i, j] = int(round(255 * (matrix[i, j] / max_element)))
     return matrix
 
-
+# TODO более подробный рефакторинг и доработка на несколько целей
 def target_generator():
     max_element = 0
     matrix = np.zeros((Height, Width))

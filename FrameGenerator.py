@@ -11,6 +11,7 @@ target = target_generator()
 
 matrix = np.zeros((Height, Width))
 
+# TODO узнать о приоде шума и по какому принципу он накладывается -- лекции курикши
 for i in range(0, Height):
     for j in range(0, Width):
         a = int(max((noise1[i, j], target[i, j])))
