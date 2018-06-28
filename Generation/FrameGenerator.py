@@ -3,13 +3,12 @@ from Generation.PrintFunction import print_matrix
 from Generation.TargetsGenerator import target_generator
 
 
-def frame_generator():
-    noise = noise_generator()
-    target = target_generator()
+def frame_generator(height, width, x_target, y_target, gamma, amplitude, print_attribute='no_print'):
+    # noise = noise_generator(height, width)
+    target = target_generator(height, width, x_target, y_target, gamma, amplitude)
 
-    matrix = noise + target
+    # matrix = noise + target
+    matrix = target
+    if (print_attribute == 'print'):
+        print_matrix(matrix, 'frame')
     return matrix
-
-
-frame = frame_generator()
-print_matrix(frame, 'frame')

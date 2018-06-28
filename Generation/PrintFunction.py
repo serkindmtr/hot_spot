@@ -1,7 +1,7 @@
 from PIL import Image
 from PIL import ImageDraw
-from settings import Height
-from settings import Width
+from settings import height
+from settings import width
 import numpy as np
 
 
@@ -11,14 +11,14 @@ def normalise_matrix(matrix):
 
 
 def print_normalised_matrix(matrix, draw):
-    for i in range(0, Height):
-        for j in range(0, Width):
+    for i in range(0, height):
+        for j in range(0, width):
             a = int(matrix[i, j])
             draw.point((j, i), fill=(a, a, a))
 
 
 def print_matrix(matrix, picture_name):
-    img = Image.new("RGB", (Width, Height), (0, 0, 0))
+    img = Image.new("RGB", (width, height), (0, 0, 0))
     draw = ImageDraw.Draw(img)
 
     clone_matrix = matrix.copy()
