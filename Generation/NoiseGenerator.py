@@ -18,7 +18,7 @@ def noise_generator(height, width, print_attribute='no_print'):
     gauss = np.random.normal(mean, sigma, (row, col))
     gauss = gauss.reshape(row, col)
     noise = matrix + gauss
-    noise = matrix_module(height, width, noise)
+    # noise = matrix_module(height, width, noise)
     if (print_attribute == 'print'):
         print_matrix(noise, 'noise')
     return noise

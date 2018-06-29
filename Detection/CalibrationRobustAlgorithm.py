@@ -35,12 +35,13 @@ def get_coefficients(matrix, x_target, y_target, gamma, radius):
 
 # setting constants
 
-gamma = np.zeros(3)
-gamma[0] = 0.5
-gamma[1] = 1.0
-gamma[2] = 3.0
+gamma = np.zeros(4)
+gamma[0] = 0.3
+gamma[1] = 0.6
+gamma[2] = 1.0
+gamma[3] = 2.0
 
-radius = np.zeros(3)
+radius = np.zeros(4)
 for radius_iterator in range(radius.size):
     radius[radius_iterator] = gamma[radius_iterator] * 3.0
 
@@ -56,9 +57,9 @@ y_target[2] = 11.0
 
 count_iteration = 10 ** 5
 
-mas = np.empty((3,3), np.ndarray)
+mas = np.empty((4, 3), np.ndarray)
 
-h = np.zeros(3)
+h = np.zeros(4)
 
 for gamma_iterator in range(gamma.size):
     h_potential = np.zeros(3)
@@ -66,7 +67,7 @@ for gamma_iterator in range(gamma.size):
         el_mas = np.zeros(count_iteration + 1)
 
         for experiment_iterator in range(1, count_iteration + 1):
-            matrix = noise_generator()
+            matrix = noise_generator(20, 20)
             el = get_coefficients(matrix,
                                   x_target[target_iterator],
                                   y_target[target_iterator],
@@ -76,16 +77,16 @@ for gamma_iterator in range(gamma.size):
 
         el_mas.sort(kind='quicksort')
         mas[gamma_iterator, target_iterator] = el_mas
-        true_num = int(count_iteration * 0.9)
+        true_num = int(count_iteration * 0.95)
         h_potential[target_iterator] = el_mas[true_num]
     h[gamma_iterator] = h_potential.max()
 
 file = open('gamma.txt', 'w')
-for i in range(0, 3):
+for i in range(0, 4):
     file.write(str(h[i]) + '\n')
 file.close()
 
-for i in range(0, 3):
+for i in range(0, 4):
     for j in range(0, 3):
         ax_x = np.arange(1, count_iteration + 2, 1)
         graph = plt.plot(ax_x, mas[i, j])

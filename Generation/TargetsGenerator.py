@@ -18,9 +18,9 @@ def detection_psf_frame(x_target, y_target, radius):
     return psf_frame
 
 
-def target_generator(height, Width, x_target, y_target, gamma, amplitude, print_attribute='no_print'):
+def target_generator(height, width, x_target, y_target, gamma, amplitude, print_attribute='no_print'):
     radius = gamma * 3
-    matrix = np.zeros((height, Width))
+    matrix = np.zeros((height, width))
     psf_frame = detection_psf_frame(x_target, y_target, radius)
     for i in range(psf_frame['y_target_minus_r'], psf_frame['y_target_plus_r']):
         for j in range(psf_frame['x_target_minus_r'], psf_frame['x_target_plus_r']):

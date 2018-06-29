@@ -1,8 +1,9 @@
-import random
-l = list()
-l.append({'x' : 1, 'y' : 2})
-print(l)
-print(l[0]['x'])
+m = []
 
-x = random.randint(0, 20)
-print(x)
+target = 1
+while target != 0:
+    target = int(input())
+    if target != 0:
+        m.append(target)
+print(sum(m)/float(len(m)))
+

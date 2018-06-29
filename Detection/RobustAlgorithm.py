@@ -5,8 +5,6 @@ import numpy as np
 import math
 
 
-
-
 def get_el(matrix, x_target, y_target, gamma, radius):
     x_target_minus_r = int(math.floor(x_target - radius))
     x_target_plus_r = int(math.ceil(x_target + radius))
@@ -32,9 +30,45 @@ def get_el(matrix, x_target, y_target, gamma, radius):
     el = up_sum / math.sqrt(low_sum)
     return el
 
+# ----Многоцелевой пример---------
+# def robust_algorithm(matrix, gamma, h):
+#     result_matrix = list()
+#     radius = gamma * 3
+#     y_range, x_range = matrix.shape
+#     min_y_range = radius
+#     min_x_range = radius
+#     max_y_range = y_range - radius
+#     max_x_range = x_range - radius
+#     i = min_y_range
+#     j = min_x_range
+#     while i <= max_y_range:
+#         while j <= max_x_range:
+#             if ((min_x_range <= j) and (j <= max_x_range) and (min_y_range <= i) and (i <= max_y_range)):
+#                 el = get_el(matrix, j, i, gamma, radius)
+#                 if (el > h):
+#                     result_matrix.append({'x': j, 'y': i})
+#
+#             if ((min_x_range <= (j + 0.5)) and ((j + 0.5) <= max_x_range) and (min_y_range <= i) and (i <= max_y_range)):
+#                 el = get_el(matrix, (j + 0.5), i, gamma, radius)
+#                 if (el > h):
+#                     result_matrix.append({'x': j + 0.5, 'y': i})
+#
+#             if ((min_x_range <= j) and (j <= max_x_range) and (min_y_range <= (i + 0.5)) and ((i + 0.5) <= max_y_range)):
+#                 el = get_el(matrix, j, (i + 0.5), gamma, radius)
+#                 if (el > h):
+#                     result_matrix.append({'x': j, 'y': i + 0.5})
+#
+#             if ((min_x_range <= (j + 0.5)) and ((j + 0.5) <= max_x_range) and (min_y_range <= (i + 0.5)) and ((i + 0.5) <= max_y_range)):
+#                 el = get_el(matrix, (j + 0.5), (i + 0.5), gamma, radius)
+#                 if (el > h):
+#                     result_matrix.append({'x': j + 0.5, 'y': i + 0.5})
+#             j += 1
+#         j = min_x_range
+#         i += 1
+#     return result_matrix
+
 
 def robust_algorithm(matrix, gamma, h):
-    result_matrix = list()
     radius = gamma * 3
     y_range, x_range = matrix.shape
     min_y_range = radius
@@ -43,28 +77,38 @@ def robust_algorithm(matrix, gamma, h):
     max_x_range = x_range - radius
     i = min_y_range
     j = min_x_range
+    target = list()
+    max_el = 0
     while i <= max_y_range:
         while j <= max_x_range:
-            if ((min_x_range <= j) and (j <= max_x_range) and (min_y_range <= i) and (i <= max_y_range)):
+            if (min_x_range <= j) and (j <= max_x_range) and (min_y_range <= i) and (i <= max_y_range):
                 el = get_el(matrix, j, i, gamma, radius)
-                if (el > h):
-                    result_matrix.append({'x': j, 'y': i})
+                if (el > h) and (el > max_el):
+                    max_el = el
+                    target.clear()
+                    target.append({'x': j, 'y': i})
 
-            if ((min_x_range <= (j + 0.5)) and ((j + 0.5) <= max_x_range) and (min_y_range <= i) and (i <= max_y_range)):
+            if (min_x_range <= (j + 0.5)) and ((j + 0.5) <= max_x_range) and (min_y_range <= i) and (i <= max_y_range):
                 el = get_el(matrix, (j + 0.5), i, gamma, radius)
-                if (el > h):
-                    result_matrix.append({'x': j + 0.5, 'y': i})
+                if (el > h) and (el > max_el):
+                    max_el = el
+                    target.clear()
+                    target.append({'x': j + 0.5, 'y': i})
 
-            if ((min_x_range <= j) and (j <= max_x_range) and (min_y_range <= (i + 0.5)) and ((i + 0.5) <= max_y_range)):
+            if (min_x_range <= j) and (j <= max_x_range) and (min_y_range <= (i + 0.5)) and ((i + 0.5) <= max_y_range):
                 el = get_el(matrix, j, (i + 0.5), gamma, radius)
-                if (el > h):
-                    result_matrix.append({'x': j, 'y': i + 0.5})
+                if (el > h) and (el > max_el):
+                    max_el = el
+                    target.clear()
+                    target.append({'x': j, 'y': i + 0.5})
 
-            if ((min_x_range <= (j + 0.5)) and ((j + 0.5) <= max_x_range) and (min_y_range <= (i + 0.5)) and ((i + 0.5) <= max_y_range)):
+            if (min_x_range <= (j + 0.5)) and ((j + 0.5) <= max_x_range) and (min_y_range <= (i + 0.5)) and ((i + 0.5) <= max_y_range):
                 el = get_el(matrix, (j + 0.5), (i + 0.5), gamma, radius)
-                if (el > h):
-                    result_matrix.append({'x': j + 0.5, 'y': i + 0.5})
+                if (el > h) and (el > max_el):
+                    max_el = el
+                    target.clear()
+                    target.append({'x': j + 0.5, 'y': i + 0.5})
             j += 1
         j = min_x_range
         i += 1
-    return result_matrix
+    return target
