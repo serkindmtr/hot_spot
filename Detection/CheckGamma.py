@@ -20,7 +20,7 @@ gamma[0] = 2.0
 
 amplitude = np.zeros(80)
 for i in range(amplitude.size):
-    amplitude[i] = i + 1
+    amplitude[i] = i + 5
 
 x_target = np.zeros(3)
 x_target[0] = 10.5

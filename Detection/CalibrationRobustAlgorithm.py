@@ -55,7 +55,7 @@ y_target[1] = 11.0
 x_target[2] = 11.0
 y_target[2] = 11.0
 
-count_iteration = 10 ** 5
+count_iteration = 10 ** 4
 
 mas = np.empty((4, 3), np.ndarray)
 
@@ -86,10 +86,27 @@ for i in range(0, 4):
     file.write(str(h[i]) + '\n')
 file.close()
 
-for i in range(0, 4):
-    for j in range(0, 3):
-        ax_x = np.arange(1, count_iteration + 2, 1)
-        graph = plt.plot(ax_x, mas[i, j])
-        plt.grid(True)
-        plt.title('Gamma = %f, [x,y] = [%f,%f]' % (gamma[i], x_target[j], y_target[j]), fontsize=12)
-        plt.show()
+ax_x = np.arange(1, count_iteration + 2, 1)
+
+# for i in range(0, 4):
+#     for j in range(0, 3):
+#         graph = plt.plot(ax_x, mas[i, j])
+#         plt.grid(True)
+#         plt.title('Gamma = %f, [x,y] = [%f,%f]' % (gamma[i], x_target[j], y_target[j]), fontsize=12)
+#         plt.show()
+
+colors = []
+colors.append('red')
+colors.append('green')
+colors.append('blue')
+colors.append('magenta')
+
+for j in range(0,3):
+    hand = []
+    for i in range(0, 4):
+        graph, = plt.plot(ax_x, mas[i, j], label=('gamma = %f' % gamma[i]))
+        hand.append(graph)
+    plt.grid(True)
+    plt.legend(handles=hand)
+    plt.title('[x,y] = [%f,%f]' % (x_target[j], y_target[j]), fontsize=12)
+    plt.show()

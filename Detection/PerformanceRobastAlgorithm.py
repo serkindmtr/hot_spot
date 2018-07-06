@@ -61,4 +61,4 @@ for i in range(0, 3):
     graph = plt.plot(x, y)
     plt.grid(True)
     plt.title('Gamma = %f' % (gamma[i]), fontsize=12)
-    plt.show()
+
